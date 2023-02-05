@@ -6,10 +6,10 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private List<Enemy> _enemys;
     [SerializeField] private Enemy _closest;
-
-    
    
-    
+
+
+
 
 
     // Update is called once per frame

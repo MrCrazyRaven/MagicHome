@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bulet : MonoBehaviour
 {
+    
     public int damage = 5;
     [SerializeField] private float speed;
     private void Start()
@@ -21,7 +22,7 @@ public class Bulet : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponent))
             {
-                enemyComponent.TakeEffect(4, collision.gameObject);
+                
                 enemyComponent.TakeDamage(damage);
                 Destroy(gameObject);
                 

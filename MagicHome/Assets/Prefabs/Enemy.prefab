@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8825603001449236169}
   - component: {fileID: 8911709273697468559}
   - component: {fileID: 8820371594591467782}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -151,6 +151,14 @@ MonoBehaviour:
   speed: 3
   _health: 0
   _maxHealth: 10
+  attackCooldown: 0.56
+  range: 1.38
+  damage: 1
+  colliderDistance: 0.84
+  boxCollider: {fileID: 5879227668802243059}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &8820371594591467782
 MonoBehaviour:
   m_ObjectHideFlags: 0

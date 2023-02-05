@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerAttak : MonoBehaviour
 {
+    public int AttakName;
+    public int[] AttakNames;
     [SerializeField] private GameObject _weapond;
     [SerializeField] private Transform _shotPoint;
     [SerializeField] private float _startTimeBtwShots;
@@ -24,28 +26,20 @@ public class PlayerAttak : MonoBehaviour
     
     public magicAtak mAtak;
 
-    public void AttakType(int value)
+
+    public void Start()
     {
-        switch (value)
-        {
-            case 0:
-                mAtak = magicAtak.fireball;
-                break;
-            case 1:
-                mAtak = magicAtak.bubble;
-                break;
-            default:
-                mAtak = magicAtak.bullet;
-                break;
-        }
-        
+        AttakNames = new int[3];
     }
-    
     public void Attak()
     {
-        switch (mAtak)
+        foreach (var item in AttakNames)
         {
-            case magicAtak.bullet:
+
+        }
+        switch (AttakNames[0], AttakNames[1], AttakNames[2])
+        {
+            case (1,1,1):
                 if (_TimeBtwShots == true)
                 {
                     Instantiate(magicAtaks[0], player.transform.position, player.transform.rotation);
@@ -55,14 +49,14 @@ public class PlayerAttak : MonoBehaviour
                 }
                 
                 break;
-            case magicAtak.bubble:
+            case (1, 2, 1):
                 atakButtn.SetActive(false);
                 atakJoystick.SetActive(true);
                 aim.SetActive(true);
                 atakButtnIn.SetActive(true);
                 aim.transform.position = player.transform.position;
                 break;
-            case magicAtak.fireball:
+            case (1, 2, 2):
                 if (_TimeBtwShots == true  )
                 {                
                 Instantiate(magicAtaks[2], _shotPoint.position, _weapond.transform.rotation);
@@ -75,7 +69,13 @@ public class PlayerAttak : MonoBehaviour
 
             default:
                 break;
+
         }
+        for (int i = 0; i < AttakNames.Length; i++)
+        {
+            AttakNames[i] = 0;
+        }
+        AttakName = 0;
     }
     private IEnumerator LvTame()
     {
@@ -93,4 +93,17 @@ public class PlayerAttak : MonoBehaviour
         aim.SetActive(false);
         atakButtnIn.SetActive(false);
     }
+    public void MagBild(int Zac) 
+    {
+        if (AttakName < 3)
+        {
+            AttakNames[AttakName] = Zac;
+            AttakName++;
+
+        }
+        
+
+     
+    }
+
 }
