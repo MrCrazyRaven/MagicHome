@@ -17,26 +17,20 @@ public class PlayerAttak : MonoBehaviour
     public GameObject atakButtnIn;
     public GameObject atakJoystick;
     public GameObject aim;
-    public enum magicAtak
-    {
-        fireball = 1,
-        bubble = 2,
-        bullet = 3
-    }
-    
-    public magicAtak mAtak;
+    [SerializeField] private GameObject[] _displayingAbilities;
+    [SerializeField] private GameObject Abilities;
+
+
 
 
     public void Start()
     {
+        _displayingAbilities = new GameObject[3];
         AttakNames = new int[3];
     }
     public void Attak()
     {
-        foreach (var item in AttakNames)
-        {
-
-        }
+       
         switch (AttakNames[0], AttakNames[1], AttakNames[2])
         {
             case (1,1,1):
@@ -97,6 +91,7 @@ public class PlayerAttak : MonoBehaviour
     {
         if (AttakName < 3)
         {
+            _displayingAbilities[AttakName] = Abilities;
             AttakNames[AttakName] = Zac;
             AttakName++;
 

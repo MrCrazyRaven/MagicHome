@@ -9,7 +9,7 @@ public class Enemy : Characters
     private GameObject _player;
     [SerializeField]private GameObject _spot;
     public float speed;
-    private float _attackDistance = 4f, _detectionDistance = 15f;
+    private float _attackDistance = 4f, _detectionDistance = 35f;
     [SerializeField] private float _health , _maxHealth = 10f;
     public static  UnityEvent onEnemyDied = new UnityEvent();
     [Header("Attack Parameters")]
@@ -25,12 +25,16 @@ public class Enemy : Characters
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
     private Player playerHealth;
+    [SerializeField]
+    private Animator animator;
+   
 
 
 
 
     void Start()
     {
+        
         _spots = GameObject.FindGameObjectsWithTag("Spot");
         _health = _maxHealth;
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -39,20 +43,26 @@ public class Enemy : Characters
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("MoveX", 0);
+
         cooldownTimer += Time.deltaTime;
-        //if (Vector2.Distance(transform.position,_player.GetComponent<Transform>().position)  > _attackDistance && 
-        //    Vector2.Distance(transform.position, _player.GetComponent<Transform>().position) < _detectionDistance)
-        //{
-        //      Hunt(speed, _player);
-        //}
+        
         
         if (PlayerInSight())
         {
             if (cooldownTimer >= attackCooldown)
             {
                     cooldownTimer = 0;
-                    DamagePlayer();
+                    animator.SetTrigger("EnemyAttak");
             }
+        }
+        else if (Vector2.Distance(transform.position, _player.GetComponent<Transform>().position) > _attackDistance &&
+            Vector2.Distance(transform.position, _player.GetComponent<Transform>().position) < _detectionDistance)
+        {
+            Hunt(speed, _player);
+            animator.SetFloat("MoveX", 1);
+
+
         }
         
     }
@@ -110,6 +120,8 @@ public class Enemy : Characters
         }
         return _spot;
     }
+    
 
 }
+
 

@@ -10,6 +10,15 @@ public abstract class Move : MonoBehaviour
         
         if (target)
         {
+            if (target.transform.position.x < transform.position.x && transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector2 (-transform.localScale.x, transform.localScale.y);
+            }
+            else if(target.transform.position.x > transform.position.x && transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
+            }
+
             transform.position = Vector2.MoveTowards(transform.position, target.GetComponent<Transform>().position, speed * Time.deltaTime);
         }
     }
